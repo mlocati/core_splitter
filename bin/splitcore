@@ -25,7 +25,7 @@ git remote remove origin
 # -- --all updates all existing references, which is all existing branches
 git filter-branch --prune-empty --tag-name-filter cat --subdirectory-filter concrete -- --all
 
-git push --all git@github.com:KorvinSzanto/concrete5-core.git -f
-git push --tags git@github.com:KorvinSzanto/concrete5-core.git -f
+git push --all git@github.com:concrete5/concrete5-core.git -f
+git push --tags git@github.com:concrete5/concrete5-core.git -f
 cd ..
 rm -rf concrete5
