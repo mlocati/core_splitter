@@ -8,7 +8,7 @@ set -o nounset
 # The version of https://github.com/concrete5/incremental-filter-branch to be used
 IFB_VERSION=1.0.1
 
-# Store in SCRIPT_DIR the directory that contain this script
+# Store in SCRIPT_DIR the directory that contains this script
 # Please remark that this won't work in case of symlinks/hardlinks
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
@@ -18,13 +18,13 @@ WORK_DIR=${SCRIPT_DIR}/temp
 # Store in IFB_PATH the path of the incremental-filter-branch directory
 IFB_PATH=${SCRIPT_DIR}/incremental-filter-branch-${IFB_VERSION}
 
-# Store in IFB_BIN the path of the incremental-filter-branch directory
+# Store in IFB_BIN the path of the incremental-filter-branch command
 IFB_BIN=${IFB_PATH}/bin/incremental-git-filterbranch
 
 # Let's check if we don't have the incremental-filter-branch command
 if ! test -f "${IFB_BIN}"
 then
-	# The incremental-filter-branch directory does not exist: let's download the zip file
+	# The incremental-filter-branch command does not exist locally: let's download it
 
 	# Store in IFB_URL the path of the archive to be downloaded
 	IFB_URL=https://github.com/concrete5/incremental-filter-branch/archive/${IFB_VERSION}.tar.gz
