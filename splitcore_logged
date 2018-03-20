@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Exit immediately if a pipeline, a list, or a compound command, exits with a non-zero status.
+set -o errexit
+# Treat unset variables and parameters other than the special parameters "@" and "*" as an error when performing parameter expansion.
+set -o nounset
+
+# Store in SCRIPT_DIR the directory that contains this script
+# Please remark that this won't work in case of symlinks/hardlinks
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+# Store in LOG_DIR the directory that will contain the logs
+LOG_DIR=${SCRIPT_DIR}/logs
+
+# Store in LOG_FILE the full path of the log file
+# The log file will be in format YYYY-MM.log in UTC time (-u), so we'll have one log file per month
+LOG_FILE=${LOG_DIR}/$(date -u +'%Y-%m').log
+
+# Check if the LOG_DIR does not exist
+if ! test -d "${LOG_DIR}"
+then
+	# LOG_DIR does not exist: let's create it
+	echo 'Creating the log directory'
+	mkdir -p "${LOG_DIR}"
+fi
+
+# Actually execute the command, appending (>>) its standard output (1) and its standard error (2) to LOG_FILE
+"${SCRIPT_DIR}/splitcore" 1>>"${LOG_FILE}" 2>>"${LOG_FILE}"
