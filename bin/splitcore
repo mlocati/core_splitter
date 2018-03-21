@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Exit immediately if a pipeline, a list, or a compound command, exits with a non-zero status.
+set -o errexit
+# Treat unset variables and parameters other than the special parameters "@" and "*" as an error when performing parameter expansion.
+set -o nounset
+
+# The version of https://github.com/concrete5/incremental-filter-branch to be used
+IFB_VERSION=1.0.2
+
+# Store in SCRIPT_DIR the directory that contains this script
+# Please remark that this won't work in case of symlinks/hardlinks
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+# Store in WORK_DIR the directory that will contain the working repositories
+WORK_DIR=${SCRIPT_DIR}/../temp
+
+# Store in IFB_PATH the path of the incremental-filter-branch directory
+IFB_PATH=${SCRIPT_DIR}/../vendor/bin
+
+# Store in IFB_BIN the path of the incremental-filter-branch command
+IFB_BIN=${IFB_PATH}/incremental-git-filterbranch
+
+# Perform the incremental filter-branch operation
+"${IFB_BIN}" \
+	--workdir "${WORK_DIR}" \
+	--branch-whitelist 'develop master rx:release\/.*' \
+	--tag-blacklist 'rx:5\..*' \
+	--prune-branches --prune-tags \
+	--tags-plan all --tags-max-history-lookup 10 \
+	-- \
+	git@github.com:concrete5/concrete5.git \
+	'--prune-empty --subdirectory-filter concrete' \
+	git@github.com:concrete5/concrete5-core.git

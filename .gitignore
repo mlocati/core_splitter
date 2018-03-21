@@ -1,3 +1,5 @@
 /incremental-filter-branch-*/
-/logs/
-/temp/
+/logs/*
+/temp/*
+.idea/
+vendor/
