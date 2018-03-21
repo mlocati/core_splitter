@@ -31,4 +31,4 @@ IFB_BIN=${IFB_PATH}/incremental-git-filterbranch
 	-- \
 	git@github.com:concrete5/concrete5.git \
 	'--prune-empty --subdirectory-filter concrete' \
-	git@github.com:concrete5/concrete5-core.git
+	git@github.com:korvinszanto/concrete5-core.git
