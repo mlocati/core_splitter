@@ -28,4 +28,4 @@ fi
 printf '\n### splitcode started on %s (UTC) ###\n' "$(date -u +'%Y-%m-%d %H.%M.%S')" 1>>"${LOG_FILE}"
 
 # Actually execute the command, appending (>>) its standard output (1) and its standard error (2) to LOG_FILE
-"${SCRIPT_DIR}/splitcore" 2>&1 | tee -a ${LOG_FILE}
+"${SCRIPT_DIR}/splitcore" 2>&1 | tee -a "${LOG_FILE}"
